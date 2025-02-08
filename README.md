@@ -1,4 +1,4 @@
-Heres the readme I stole from the project files:
+Here's the readme I stole from the project files:
 
 
 # Introduction
