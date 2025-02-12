@@ -29,10 +29,10 @@ void histogramStretching(int **oData, int **rData, int height, int width) {
 void medianFilter(int **oData, int **rData, int height, int width) {
   // TODO: write your code
   // this loop moves the grid down through rows
-  for (int row = 1; row < width; row++)
+  for (int row = 1; row < height - 1; row++)
   {
     // this loop moves the grid across the columns
-    for (int column = 1; column < height; column++)
+    for (int column = 1; column < width - 1; column++)
     {
         // copy the 3x3 grid of values to a one dimensional array
         int group[9] =  {oData[row-1][column-1], oData[row-1][column], oData[row-1][column+1],
@@ -51,22 +51,24 @@ void medianFilter(int **oData, int **rData, int height, int width) {
                 group[element + 1] = temp;
             }
         }
+        // copy the median element to rdata
         rData[row][column] = group[4];
     }
   }
   //copy edge data to output
   //first loop for left/right sides
-  for (size_t row = 0; row <= height; row++)
+  for (int row = 0; row < height; row++)
   {
     rData[row][0] = oData[row][0];
-    rData[row][width] = oData[row][width];
+    //remember to subtract one from size constants for proper indexing!
+    rData[row][width-1] = oData[row][width-1];
   }
   
   //second loop for top/bottom
-  for (size_t column = 1; column < height; column++)
+  for (int column = 0; column < width; column++)
     {
         rData[0][column] = oData[0][column];
-        rData[height][column] = oData[height][column];
+        rData[height-1][column] = oData[height-1][column];
     }
     
 }
