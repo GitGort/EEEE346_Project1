@@ -16,6 +16,7 @@ void copyImage(int **oData, int **rData, int height, int width) {
 
 void imgNegation(int **oData, int **rData, int height, int width) {
   // TODO: write your code
+    output_pixel_value = 255 - original_pixel_value
 }
 
 void thresholding(int **oData, int **rData, int height, int width) {
