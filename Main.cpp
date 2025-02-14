@@ -11,6 +11,7 @@ const int THRESHOLD_OPERATION  = 1;
 const int STRETCHING_OPERATION = 2;
 const int MEDIAN_OPERATION     = 3;
 const int EDGEDETECT_OPERATION = 4;
+const int TRANSMIT_OPERATION   = 5;
 
 // Memory for original image
 int **original;
@@ -108,6 +109,7 @@ void printMenu() { //{{{
   cout << "\t(" << STRETCHING_OPERATION << ") Histogram Stretching \n";
   cout << "\t(" << MEDIAN_OPERATION << ") Median Filter \n";
   cout << "\t(" << EDGEDETECT_OPERATION << ") Edge Detection \n";
+  cout << "\t(" << TRANSMIT_OPERATION << ") Transmission Effect \n";
   cout << "Enter Selection: ";
 } //}}}
 
@@ -164,6 +166,9 @@ void performOperation(unsigned int op) { //{{{
   	  break;
   	case EDGEDETECT_OPERATION:
   	  edgeDetect(original, modified, height, width);
+  	  break;
+    case TRANSMIT_OPERATION:
+  	  transmit(original, modified, height, width);
   	  break;
   	default:
   	  break;
