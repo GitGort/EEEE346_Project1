@@ -169,3 +169,52 @@ void edgeDetect(int **oData, int **rData, int height, int width) {
         rData[height-1][column] = oData[height-1][column];
     }
 }
+
+void transmit(int **oData, int **rData, int height, int width) {
+  int combo; //this variable helps create streaks of errors
+  for (int row = 0; row < height; row++)
+  {
+    combo = 0; //reset combo for each row
+    for (int column = 0; column < width; column++)
+    {
+      //create a corruption effect randomly
+      //corruption effects are much more likely after a previous corruption event
+        if ((rand() % 30) == 0 || (rand() % 4) < combo)
+        {
+          //set combo to high
+          combo = 3;
+          //choose randomly from a list of corruption effects
+          if (rand() % 5 + 1 == 0)
+          {
+            rData[row][column] = rand() % 255;
+          }
+          else if (rand() % 5 + 1 == 1)
+          {
+            rData[row][column] = 255;
+          }
+          else if (rand() % 5 + 1 == 2)
+          {
+            //exception handling for the lookahead effect
+            if (column == width - 1)
+            {
+              rData[row][column] = 0;
+            }
+            else
+            {
+              rData[row][column] = oData[row][column + 1];
+            }
+          }
+          else
+          {
+            rData[row][column] = 255 - oData[row][column];
+          }
+        }
+        //if no effect occurs copy the pixel and reset combo
+        else
+        {
+          rData[row][column] = oData[row][column];
+          combo = 0;
+        }
+    }
+  }
+}
