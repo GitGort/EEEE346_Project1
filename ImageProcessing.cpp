@@ -16,15 +16,57 @@ void copyImage(int **oData, int **rData, int height, int width) {
 
 void imgNegation(int **oData, int **rData, int height, int width) {
   // TODO: write your code
-    output_pixel_value = 255 - original_pixel_value
+  for (int row = 0; row < height; row++)
+  {
+    // this loop moves the grid across the columns
+    for (int column = 0; column < width; column++)
+    {
+        // negate value WRT 255 and send to rData
+        rData[row][column] = 255 - oData[row][column];
+    }
+  }
 }
 
 void thresholding(int **oData, int **rData, int height, int width) {
   // TODO: write your code
+  for (int row = 0; row < height; row++)
+  {
+    // this loop moves the grid across the columns
+    for (int column = 0; column < width; column++)
+    {
+        // check if oData value is above threshold val.
+        // set to 255 if above
+        if (oData[row][column] > 127) 
+          rData[row][column] = 255;
+        // set to 0 otherwise
+        else 
+          rData[row][column] = 0;
+    }
+  }
 }
 
 void histogramStretching(int **oData, int **rData, int height, int width) {
   // TODO: write your code
+  // Loop through all pixels to find min and max
+  int min = 255, max = 0;
+  for (int row = 0; row < height; row++)
+  {
+    for (int column = 0; column < width; column++)
+    {
+        if (oData[row][column] < min)
+          min = oData[row][column];
+        if (oData[row][column] > max)
+          max = oData[row][column];
+    }
+  }
+  // Run back through the image and stretch 
+  for (int row = 0; row < height; row++)
+  {
+    for (int column = 0; column < width; column++)
+    {
+        rData[row][column] = 255 * (oData[row][column] - min) / (max - min);
+    }
+  }
 }
 
 void medianFilter(int **oData, int **rData, int height, int width) {
