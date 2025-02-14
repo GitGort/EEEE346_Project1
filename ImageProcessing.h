@@ -53,4 +53,14 @@ void medianFilter(int **oData, int **rData, int height, int width);
  */
 void edgeDetect(int **oData, int **rData, int height, int width);
 
+/*
+ * creates a goofy lossy transmission effect.
+ *
+ * @oData - original input 2D array
+ * @rData - output 2D array
+ * @height - height of 2D arrays
+ * @width - width of 2D arrays
+ */
+void transmit(int **oData, int **rData, int height, int width);
+
 #endif
